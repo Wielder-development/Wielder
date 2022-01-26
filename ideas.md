@@ -1,0 +1,14 @@
+ - welcome bot.
+ - logger.
+ - moderation shit.
+ - make a development server.
+ - Use mongodb with mongoose client as database.
+ - custom prefix
+ - music.
+ - reaction roles.
+ - custom commands.
+ - twitch + youtube + reddit reminder.
+ - get meme from a certain r/, reddit integration.
+ - spam detection
+ 
+ - multi server support
