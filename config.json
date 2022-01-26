@@ -1,0 +1,19 @@
+{
+    "prefix": "!",
+    "catagories": {
+        "welcomer": 124125125,
+        "moderation": true,
+
+        "reminders": {
+            "twitch": false,
+            "youtube": false,
+            "reddit": false
+        }
+    },
+    "reactionRoles": [
+        {
+            "messageId": 12314551,
+            "roleId": 125412
+        }
+    ]
+}
