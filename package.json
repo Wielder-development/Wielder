@@ -1,7 +1,23 @@
 {
+  "name": "psyonix-bot-tester",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
   "dependencies": {
+    "@discordjs/builders": "^0.12.0",
+    "@discordjs/rest": "^0.3.0",
+    "common-tags": "^1.8.2",
+    "consola": "^2.15.3",
+    "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "dotenv": "^14.3.2",
-    "fs": "^0.0.1-security"
+    "glob": "^7.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
