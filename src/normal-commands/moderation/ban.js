@@ -8,9 +8,9 @@ module.exports = {
     if (!message.guild.me.permissions.has(`BAN_MEMBERS`))
       return message.channel.send(`sorry, i dont have permission to ban members, please enable it in my role's settings`);
     let targetUser = message.mentions.users.first();
-    if (!targetMember)
+    if (!targetUser)
       return message.channel.send(`sorry, couldnt find the guy that you were looking for`);
-    if (client.user.id == targetMember.id)
+    if (client.user.id == targetUser.id)
       return message.channel.send(`sorry, i cannot ban myself`);
     
     
