@@ -12,3 +12,4 @@
 - spam detection
 - add buttons to info commands.
 - multi server support: In Proccess.
+- translations
