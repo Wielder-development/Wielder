@@ -141,13 +141,13 @@ module.exports = class BotClient extends Client {
     );
 
     for (const folder of normalCommandFolders) {
-      const eventFiles = fs
+      const normalCommandsFiles = fs
         .readdirSync(
           path.resolve(__dirname, "..", "normal-commands", `${folder}`)
         )
         .filter((f) => f.endsWith(".js"));
 
-      for (const file of eventFiles) {
+      for (const file of normalCommandsFiles) {
         const normalCommand = require(`../normal-commands/${folder}/${file}`);
 
         this.logger.log(
