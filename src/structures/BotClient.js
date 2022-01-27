@@ -4,6 +4,7 @@ const path = require("path");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 module.exports = class BotClient extends Client {
   constructor(token, dev_guild_id, client_id) {
@@ -18,11 +19,27 @@ module.exports = class BotClient extends Client {
     this.slashCommands = new Collection();
 
     this.normalCommands = new Collection();
+
+    this.db = mongoose;
   }
 
   async loadBot() {
     await this.loadModules();
+    await this.loadDB();
     await this.login(this.token);
+  }
+
+  async loadDB() {
+    this.db
+      .connect(process.env.MONGO_URI)
+      .then((val) => {
+        this.logger.log(`[DATABASE] Successfully connected to MongoDB!`);
+      })
+      .catch((e) =>
+        this.logger.error(
+          `[DATABASE] There was an error trying to connect to MongoDB: ${e}`
+        )
+      );
   }
 
   async loadModules() {
@@ -157,7 +174,7 @@ module.exports = class BotClient extends Client {
       if (this.normalCommands.has(cmd)) command = this.normalCommands.get(cmd);
 
       if (command) {
-       command.run(this, message, args)
+        command.run(this, message, args);
       }
     });
   }
