@@ -172,7 +172,7 @@ module.exports = class BotClient extends Client {
       }
 
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
-      const cmd = args.shift().toLowerCase();
+      const commandName = args.shift().toLowerCase();
 
       let command;
 
@@ -184,7 +184,7 @@ module.exports = class BotClient extends Client {
 
       if (!message.content.startsWith(prefix)) return;
 
-      if (this.normalCommands.has(cmd)) command = this.normalCommands.get(cmd);
+      command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
 
       if (command) {
         message.args = args;
