@@ -86,7 +86,7 @@ module.exports = class BotClient extends Client {
         const slashCommand = require(`../slash-commands/${folder}/${file}`);
         this.slashCommands.set(slashCommand.data.name, slashCommand);
         commands.push(slashCommand.data.toJSON());
-        this.logger.log(
+        this.logger.success(
           `[COMMANDS] Successfully loaded the (/) command ${slashCommand.data.name}`
         );
       }
@@ -99,8 +99,7 @@ module.exports = class BotClient extends Client {
           Routes.applicationGuildCommands(this.client_id, this.guild_id),
           { body: commands }
         );
-
-        console.log("Commands successfully loaded Slash Commands.");
+        this.logger.success("Commands successfully loaded Slash Commands.");
       } catch (err) {
         console.error(err);
       }
