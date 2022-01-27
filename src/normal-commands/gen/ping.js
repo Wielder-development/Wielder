@@ -1,9 +1,9 @@
 module.exports = {
   config: {
-    name: "pingg",
+    name: "ping",
   },
 
-  async run(client, message, args) {
+  async run(client, message) {
     message.channel.send(`Hello world`);
   },
 };
