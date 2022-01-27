@@ -187,7 +187,8 @@ module.exports = class BotClient extends Client {
       if (this.normalCommands.has(cmd)) command = this.normalCommands.get(cmd);
 
       if (command) {
-        command.run(this, message, args);
+        message.args = args;
+        command.run(this, message);
       }
     });
   }
