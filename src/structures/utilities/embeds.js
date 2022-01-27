@@ -8,7 +8,7 @@ module.exports = class Embeds {
       },
       title: "Error!",
       footer: {
-        text: "Bolty || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
     });
   };
@@ -17,7 +17,7 @@ module.exports = class Embeds {
     return new MessageEmbed({
       title: "Success",
       footer: {
-        text: "Bolty || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
       color: "#01FF00",
       timestamp: new Date(),
@@ -27,7 +27,7 @@ module.exports = class Embeds {
   static empty = () => {
     return new MessageEmbed({
       footer: {
-        text: "Bolty || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
     });
   };
@@ -35,7 +35,7 @@ module.exports = class Embeds {
   static randomColor = () => {
     return new MessageEmbed({
       footer: {
-        text: "Bolty || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
       color: "RANDOM",
       timestamp: new Date(),
