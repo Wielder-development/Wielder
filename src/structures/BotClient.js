@@ -5,6 +5,7 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
 const mongoose = require("mongoose");
+const Embeds = require("./utilities/embeds");
 
 module.exports = class BotClient extends Client {
   constructor(token, dev_guild_id, client_id) {
@@ -19,6 +20,8 @@ module.exports = class BotClient extends Client {
     this.slashCommands = new Collection();
 
     this.normalCommands = new Collection();
+
+    this.embeds = Embeds;
 
     this.db = mongoose;
   }
@@ -156,7 +159,17 @@ module.exports = class BotClient extends Client {
     }
 
     this.on("messageCreate", async (message) => {
-      const prefix = "?";
+      const prefixOrg = "?";
+
+      const PrefixModel = require("../models/PrefixModel");
+
+      let prefix;
+      let dbPrefix = await PrefixModel.findOne({ guildID: message.guild.id });
+      if (dbPrefix) {
+        prefix = dbPrefix.prefix;
+      } else {
+        prefix = prefixOrg;
+      }
 
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const cmd = args.shift().toLowerCase();

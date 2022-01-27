@@ -1,17 +1,14 @@
-/*
 const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
-  username: mongoose.SchemaTypes.String,
-  discordId: {
+const GuildConfigSchema = new mongoose.Schema({
+  guildID: {
     type: mongoose.SchemaTypes.String,
     required: true,
   },
-  content: {
+  prefix: {
     type: mongoose.SchemaTypes.String,
     required: true,
   },
 });
 
-module.exports = mongoose.model("User", UserSchema);
-*/
+module.exports = mongoose.model("GuildConfig", GuildConfigSchema);
