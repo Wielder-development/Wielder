@@ -8,15 +8,19 @@ module.exports = {
         page = 1;
         if (message.args[0])
             page = message.args[0];
-        // for catagories and searching for certain commands:
+        // for categories and searching for certain commands:
         if (isNaN(page)){
+            
         }
+
+
         commands = Array.from(client.normalCommands.values());
         [...commands.values()];
         let embed = client.embeds.empty();
-        embed.setTitle(`Commands:`);
+        embed.setTitle(`__**Commands:**__`);
         for (let i=(page-1)*10;i<(page)*10 && i < commands.length;i++){
-            embed.addField(commands[i].config.name, commands[i].config.description);
+            let commandConfig = commands[i].config;
+            embed.addField(commandConfig.name, commandConfig.description);
         }
         message.channel.send({ embeds: [embed] });
     },

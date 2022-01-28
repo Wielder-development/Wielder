@@ -152,7 +152,7 @@ module.exports = class BotClient extends Client {
         this.logger.log(
           `Sccessfully loaded normal command ${normalCommand.config.name}`
         );
-
+        normalCommand.config.category = folder;
         this.normalCommands.set(normalCommand.config.name, normalCommand);
       }
     }
