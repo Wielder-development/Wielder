@@ -145,7 +145,7 @@ module.exports = class BotClient extends Client {
           path.resolve(__dirname, "..", "normal-commands", `${folder}`)
         )
         .filter((f) => f.endsWith(".js"));
-
+      this.normalCommandCategories = normalCommandFolders;
       for (const file of normalCommandsFiles) {
         const normalCommand = require(`../normal-commands/${folder}/${file}`);
 
