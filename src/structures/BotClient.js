@@ -169,17 +169,10 @@ module.exports = class BotClient extends Client {
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();
 
-      let command;
-
-      if (!message.member) {
-        message.member = await message.guild.members.fetch({
-          user: message.author,
-        });
-      }
-
-      command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
+      let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
 
       if (command) {
+        message.member = await message.guild.members.fetch({user: message.author});
         message.args = args;
         command.run(this, message);
       }
