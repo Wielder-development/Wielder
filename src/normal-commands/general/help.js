@@ -26,7 +26,7 @@ module.exports = {
                     if (message.args[1]){
                         if (isNaN(message.args[1])) return;
                         page = message.args[1];
-                    } 
+                    }
                 } else {
                     embed = client.embeds.error().setDescription(`Sorry, I couldnt find the command/category that you were looking for`);
                     message.channel.send({ embeds: [embed] });
