@@ -158,18 +158,14 @@ module.exports = class BotClient extends Client {
     }
 
     this.on("messageCreate", async (message) => {
-      const prefixOrg = "?";
-
       const PrefixModel = require("../models/PrefixModel");
 
-      let prefix;
+      let prefix = "?";
       let dbPrefix = await PrefixModel.findOne({ guildID: message.guild.id });
-      if (dbPrefix) {
+      if (dbPrefix)
         prefix = dbPrefix.prefix;
-      } else {
-        prefix = prefixOrg;
-      }
 
+      if (!message.content.startsWith(prefix)) return;
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();
 
@@ -180,8 +176,6 @@ module.exports = class BotClient extends Client {
           user: message.author,
         });
       }
-
-      if (!message.content.startsWith(prefix)) return;
 
       command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
 
