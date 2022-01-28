@@ -172,7 +172,6 @@ module.exports = class BotClient extends Client {
       let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
 
       if (command) {
-        message.member = await message.guild.members.fetch({user: message.author});
         message.args = args;
         command.run(this, message);
       }
