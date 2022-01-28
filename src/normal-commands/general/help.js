@@ -19,13 +19,18 @@ module.exports = {
                 message.channel.send({ embeds: [embed] })
                 return;
             } else {
-                if (!client.normalCommandCategories.includes(page)) return;
-                commands = commands.filter(cmd=> cmd.config.category == page);
-                embed.setTitle(`__**${page}:**__`);
-                page = 1;
-                if (message.args[1]){
-                    if (isNaN(message.args[1])) return;
-                    page = message.args[1];
+                if (client.normalCommandCategories.includes(page)){
+                    commands = commands.filter(cmd=> cmd.config.category == page);
+                    embed.setTitle(`__**${page}:**__`);
+                    page = 1;
+                    if (message.args[1]){
+                        if (isNaN(message.args[1])) return;
+                        page = message.args[1];
+                    } 
+                } else {
+                    embed = client.embeds.error().setDescription(`Sorry, I couldnt find the command/category that you were looking for`);
+                    message.channel.send({ embeds: [embed] });
+                    return;
                 }
             }
         }
