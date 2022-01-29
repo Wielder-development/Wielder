@@ -174,7 +174,8 @@ module.exports = class BotClient extends Client {
 
       if (command) {
         message.args = args;
-        command.run(this, message);
+        let language = require(path.resolve(__dirname, "..", "..","translations.json"))[languageName]
+        command.run(this, message, language);
       }
     });
   }

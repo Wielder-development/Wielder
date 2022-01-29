@@ -9,24 +9,20 @@
     "en": {
         "moderation": {
             "kick":{
-                "errors": {
-                    "botMissingPerms": "sorry, i dont have permission to kick members, please enable it in my role's settings",
-                    "doesntFind": "sorry, couldnt find the guy that you were looking for",
-                    "selfAction": "sorry, i cannot kick myself",
-                    "botRoleTooLow": "sorry, i cannot kick this member since my role is too low in the hirrarchy",
-                    "authorRoleTooLowOrEqual": "sorry, i cannot kick this member since your role is too low/equal in the hirrarchy"
-                },
+                "botMissingPerms": "sorry, i dont have permission to kick members, please enable it in my role's settings",
+                "doesntFind": "sorry, couldnt find the guy that you were looking for",
+                "selfAction": "sorry, i cannot kick myself",
+                "botRoleTooLow": "sorry, i cannot kick this member since my role is too low in the hirrarchy",
+                "authorRoleTooLowOrEqual": "sorry, i cannot kick this member since your role is too low/equal in the hirrarchy",
                 "actionWithReason": "successfully ${target} kicked for ${reason}",
                 "actionWithoutReason": "successfully kicked ${target}"
             },
             "ban":{
-                "errors": {
-                    "botMissingPerms": "sorry, i dont have permission to ban members, please enable it in my role's settings",
-                    "doesntFind": "sorry, couldnt find the guy that you were looking for",
-                    "selfAction": "sorry, i cannot ban myself",
-                    "botRoleTooLow": "sorry, i cannot ban this member since my role is too low in the hirrarchy",
-                    "authorRoleTooLowOrEqual": "sorry, i cannot ban this member since your role is too low/equal in the hirrarchy"
-                },
+                "botMissingPerms": "sorry, i dont have permission to ban members, please enable it in my role's settings",
+                "doesntFind": "sorry, couldnt find the guy that you were looking for",
+                "selfAction": "sorry, i cannot ban myself",
+                "botRoleTooLow": "sorry, i cannot ban this member since my role is too low in the hirrarchy",
+                "authorRoleTooLowOrEqual": "sorry, i cannot ban this member since your role is too low/equal in the hirrarchy",
                 "actionWithReason": "successfully ${target} banned for ${reason}",
                 "actionWithoutReason": "successfully banned ${target}"
             }
