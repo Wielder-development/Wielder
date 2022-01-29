@@ -4,7 +4,7 @@ module.exports = {
       aliases: ["comamnds", "comamndslist"],
       description: "showing list of all commands",
     },
-    async run(client, message) {
+    async run(client, message, language) {
         page = 1;
         commands = Array.from(client.normalCommands.values());
         [...commands.values()];
