@@ -4,7 +4,7 @@ module.exports = {
     aliases: [],
     description: "checking the ping",
   },
-  async run(client, message) {
+  async run(client, message, language) {
     message.channel.send(`Hello world`);
   },
 };
