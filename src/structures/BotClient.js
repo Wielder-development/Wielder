@@ -158,14 +158,18 @@ module.exports = class BotClient extends Client {
     }
 
     this.on("messageCreate", async (message) => {
-      const PrefixModel = require("../models/PrefixModel");
+      const GuildConfigModel = require("../models/GuildConfigModel");
       
       let languageName = "en";
       let prefix = "?";
-      let dbPrefix = await PrefixModel.findOne({ guildID: message.guild.id });
-      if (dbPrefix)
-        prefix = dbPrefix.prefix;
+      let guildConfig = await GuildConfigModel.findOne({ guildID: message.guild.id });
+      if (guildConfig){
+        prefix = guildConfig.prefix;
+        if (guildConfig.language)
+          languageName = guildConfig.language;
+      }
 
+      
       if (!message.content.startsWith(prefix)) return;
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();

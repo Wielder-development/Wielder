@@ -9,6 +9,10 @@ const GuildConfigSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.String,
     required: true,
   },
+  language: {
+    type: mongoose.SchemaTypes.String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("GuildConfig", GuildConfigSchema);
