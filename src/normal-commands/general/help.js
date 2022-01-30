@@ -9,13 +9,18 @@ module.exports = {
         commands = Array.from(client.normalCommands.values());
         [...commands.values()];
         if (message.args[0])
-            page = message.args[0];
+            page = message.args[0].toLowerCase();
         let embed = client.embeds.empty();
+        let pageCount = Math.ceil(commands.length/10);
+        embed.footer.text+= ` || ${page} out of ${pageCount} pages`;
         // for categories and searching for certain commands:
-        if (isNaN(page)){
+        if (!isNaN(page)){
+            if (page > pageCount || page <= 0)
+                return message.channel.send({ embeds: [client.embeds.error().setDescription(`Sorry, You told me an invalid page number`)] });
+        } else {
             let cmd = commands.find(cmd=> cmd.config.name == page);
             if (cmd){
-                embed.setTitle(`__**${page}:**__`).setDescription(cmd.config.description)
+                embed.setTitle(`__**${page}:**__`).setDescription(cmd.config.description);
                 message.channel.send({ embeds: [embed] })
                 return;
             } else {
