@@ -9,14 +9,13 @@ idc for now lol, i have more importent stuff to make
 |:----:	|:------------:	|:----:	
 |Welcome bot|Moderation|Use mongodb with mongoose client as database
 |Event logger|XP system|Custom prefix
-|Reaction roles|Multi server support|
+|Reaction roles|Multi server support|Get a random meme from r/whatever user wants
 |Make a development server|              	|
 |Music bot|              	|
 |Custom commands|              	|
 |Twitch reminder|              	|
 |Youtube reminder|              	|
 |Reddit reminder|              	|
-|Get a random meme from r/whatever user wants|              	|
 |Spam detection|              	|
 |Add buttons|              	|
 |Translations|              	|
