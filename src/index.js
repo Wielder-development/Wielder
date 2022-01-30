@@ -9,9 +9,3 @@ const client = new BotClient(
 );
 
 client.loadBot();
-
-process.on('SIGINT', function() {
-  console.log("Caught interrupt signal");
-  mongoose.connection.close()
-  process.exit();
-});
