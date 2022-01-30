@@ -27,8 +27,8 @@ module.exports = class BotClient extends Client {
   }
 
   async loadBot() {
-    await this.loadModules();
     await this.loadDB();
+    await this.loadModules();
     await this.login(this.token);
   }
 
