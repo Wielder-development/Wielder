@@ -16,7 +16,7 @@ module.exports = {
         // for categories and searching for certain commands:
         if (!isNaN(page)){
             if (page > pageCount || page <= 0)
-                return message.channel.send({ embeds: [client.embeds.error().setDescription(`Sorry, You told me an invalid page number`)] });
+                return message.channel.send({ embeds: [client.embeds.error().setDescription(`Invalid page number`)] });
         } else {
             let cmd = commands.find(cmd=> cmd.config.name == page);
             if (cmd){
