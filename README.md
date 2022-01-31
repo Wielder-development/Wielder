@@ -10,7 +10,7 @@ idc for now lol, i have more importent stuff to make
 |Welcome bot|Moderation|Use mongodb with mongoose client as database
 |Event logger|XP system|Custom prefix
 |Reaction roles|Multi server support|Get a random meme from r/whatever user wants
-|Make a development server|              	|
+|Make a development server|Translations|
 |Music bot|              	|
 |Custom commands|              	|
 |Twitch reminder|              	|
@@ -18,4 +18,3 @@ idc for now lol, i have more importent stuff to make
 |Reddit reminder|              	|
 |Spam detection|              	|
 |Add buttons|              	|
-|Translations|              	|
