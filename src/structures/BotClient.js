@@ -181,15 +181,17 @@ module.exports = class BotClient extends Client {
       let dbPrefix = await PrefixModel.findOne({ guildID: message.guild.id });
       if (dbPrefix) prefix = dbPrefix.prefix;
 
-      if (message.mentions.has(this.user.id)) {
-        return message.channel.send({
-          embeds: [
-            this.embeds
-              .offical(this)
-              .setTitle(`My current prefix for this server is \`${prefix}\`.`)
-              .setDescription(`Type \`${prefix}help\` to get started.`),
-          ],
-        });
+      if (message.mentions.members.size) {
+        if (message.mentions.has(this.user.id)) {
+          return message.channel.send({
+            embeds: [
+              this.embeds
+                .offical(this)
+                .setTitle(`My current prefix for this server is \`${prefix}\`.`)
+                .setDescription(`Type \`${prefix}help\` to get started.`),
+            ],
+          });
+        }
       }
 
       if (!message.content.startsWith(prefix)) return;
