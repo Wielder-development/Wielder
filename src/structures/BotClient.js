@@ -183,14 +183,19 @@ module.exports = class BotClient extends Client {
 
       if (message.mentions.members.size) {
         if (message.mentions.has(this.user.id)) {
-          return message.channel.send({
-            embeds: [
-              this.embeds
-                .offical(this)
-                .setTitle(`My current prefix for this server is \`${prefix}\`.`)
-                .setDescription(`Type \`${prefix}help\` to get started.`),
-            ],
-          });
+          const args = message.content.trim().split(/ +/g).slice(1);
+          if (args.length == 0) return;
+
+          const commandName = args.shift().toLowerCase();
+
+          let command = this.normalCommands.find(
+            (cmd) => cmd.config.name == commandName
+          );
+          if (command) {
+            message.args = args;
+            command.run(this, message);
+          }
+          return;
         }
       }
 
