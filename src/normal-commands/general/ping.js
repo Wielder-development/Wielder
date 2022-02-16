@@ -6,7 +6,7 @@ module.exports = {
     name: "ping",
     aliases: [],
     description: "checking the ping",
-    ownerOnly: true,
+    //  ownerOnly: true,
     category: "general",
     expectedArgs: "none",
   },
