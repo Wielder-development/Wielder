@@ -207,6 +207,40 @@ module.exports = class BotClient extends Client {
         (cmd) => cmd.config.name == commandName
       );
 
+      if (
+        command.config.ownerOnly &&
+        message.author.id !== "510866456708382730" &&
+        message.author.id !== "332115664179298305"
+      ) {
+        return message.channel.send({
+          embeds: [
+            this.embeds
+              .error()
+              .setDescription(
+                `You can't run this command, this command can only be used by my developers.`
+              ),
+          ],
+        });
+      }
+
+      /*
+      if (
+        (command.config.ownerOnly &&
+          !message.author.id == "510866456708382730") ||
+        !message.author.id == "332115664179298305"
+      ) {
+        return message.channel.send({
+          embeds: [
+            this.embeds
+              .error()
+              .setDescription(
+                `You can't run this command, this command can only be used by my developers.`
+              ),
+          ],
+        });
+      }
+      */
+
       //let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
       /*let command = this.normalCommands.find(
         (cmd) => cmd.config.name == commandName
