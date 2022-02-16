@@ -1,4 +1,4 @@
-const { Client, Intents, Collection } = require("discord.js");
+const { Client, Intents, Collection, MessageEmbed } = require("discord.js");
 const consola = require("consola");
 const path = require("path");
 const { REST } = require("@discordjs/rest");
@@ -21,14 +21,16 @@ module.exports = class BotClient extends Client {
 
     this.normalCommands = new Collection();
 
+    this.normalCommandAliases = new Collection();
+
     this.embeds = Embeds;
 
     this.db = mongoose;
   }
 
   async loadBot() {
-    await this.loadDB();
     await this.loadModules();
+    await this.loadDB();
     await this.login(this.token);
   }
 
@@ -152,34 +154,61 @@ module.exports = class BotClient extends Client {
         this.logger.log(
           `Sccessfully loaded normal command ${normalCommand.config.name}`
         );
+
+        if (
+          normalCommand.config.aliases &&
+          typeof normalCommand.config.aliases == "object"
+        ) {
+          normalCommand.config.aliases.forEach((alias) => {
+            if (this.normalCommandAliases.get(alias))
+              return this.logger.error(
+                `Two commands or more have the same aliases ${alias}.`
+              );
+
+            this.normalCommandAliases.set(alias, normalCommand.config.name);
+          });
+        }
+
         normalCommand.config.category = folder;
         this.normalCommands.set(normalCommand.config.name, normalCommand);
       }
     }
 
     this.on("messageCreate", async (message) => {
-      const GuildConfigModel = require("../models/GuildConfigModel");
-      
-      let languageName = "en";
+      const PrefixModel = require("../models/PrefixModel");
+
       let prefix = "?";
-      let guildConfig = await GuildConfigModel.findOne({ guildID: message.guild.id });
-      if (guildConfig){
-        prefix = guildConfig.prefix;
-        if (guildConfig.language)
-          languageName = guildConfig.language;
+      let dbPrefix = await PrefixModel.findOne({ guildID: message.guild.id });
+      if (dbPrefix) prefix = dbPrefix.prefix;
+
+      if (message.mentions.has(this.user.id)) {
+        return message.channel.send({
+          embeds: [
+            this.embeds
+              .offical(this)
+              .setTitle(`My current prefix for this server is \`${prefix}\`.`)
+              .setDescription(`Type \`${prefix}help\` to get started.`),
+          ],
+        });
       }
 
-      
       if (!message.content.startsWith(prefix)) return;
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();
 
-      let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
+      let command = this.normalCommands.find(
+        (cmd) => cmd.config.name == commandName
+      );
+
+      //let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
+      /*let command = this.normalCommands.find(
+        (cmd) => cmd.config.name == commandName
+      );
+      */
 
       if (command) {
         message.args = args;
-        let language = require(path.resolve(__dirname, "..", "..","translations.json"))[languageName]
-        command.run(this, message, language);
+        command.run(this, message);
       }
     });
   }
