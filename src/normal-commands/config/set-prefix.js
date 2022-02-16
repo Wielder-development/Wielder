@@ -1,12 +1,15 @@
 const GuildConfigSchema = require("../../models/PrefixModel");
 
 module.exports = {
+  config: {
+    name: "set-prefix",
+    aliases: [],
+    description: "Changes the prefix",
+  },
   async run(client, message, args) {
     if (!message.member.permissions.has("ADMINISTRATOR")) return;
-
-    const newPrefix = args.join(" ");
-
-    if (!newPrefix) {
+    
+    if (args.length==0) {
       message.channel.send({
         embeds: [
           client.embeds
@@ -17,6 +20,8 @@ module.exports = {
         ],
       });
     }
+    const newPrefix = args.join(" ");
+
 
     if (newPrefix.length > 4) {
       message.channel.send({
@@ -56,9 +61,4 @@ module.exports = {
       client.logger.error(e);
     }
   },
-};
-
-module.exports.config = {
-  name: "change-prefix",
-  description: "Change my prefix.",
 };
