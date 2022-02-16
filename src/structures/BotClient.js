@@ -21,8 +21,6 @@ module.exports = class BotClient extends Client {
 
     this.normalCommands = new Collection();
 
-    this.normalCommandAliases = new Collection();
-
     this.embeds = Embeds;
 
     this.db = mongoose;
@@ -155,20 +153,6 @@ module.exports = class BotClient extends Client {
           `Sccessfully loaded normal command ${normalCommand.config.name}`
         );
 
-        if (
-          normalCommand.config.aliases &&
-          typeof normalCommand.config.aliases == "object"
-        ) {
-          normalCommand.config.aliases.forEach((alias) => {
-            if (this.normalCommandAliases.get(alias))
-              return this.logger.error(
-                `Two commands or more have the same aliases ${alias}.`
-              );
-
-            this.normalCommandAliases.set(alias, normalCommand.config.name);
-          });
-        }
-
         normalCommand.config.category = folder;
         this.normalCommands.set(normalCommand.config.name, normalCommand);
       }
@@ -185,16 +169,14 @@ module.exports = class BotClient extends Client {
         if (message.mentions.has(this.user.id)) {
           const args = message.content.trim().split(/ +/g).slice(1);
           if (args.length == 0) return;
-
           const commandName = args.shift().toLowerCase();
 
-          let command = this.normalCommands.find(
-            (cmd) => cmd.config.name == commandName
-          );
+          /*
           if (command) {
             message.args = args;
             command.run(this, message);
           }
+          */
           return;
         }
       }
@@ -203,8 +185,15 @@ module.exports = class BotClient extends Client {
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();
 
+      /*
       let command = this.normalCommands.find(
         (cmd) => cmd.config.name == commandName
+      );
+      */
+
+      let command = this.normalCommands.find(
+        (cmd) => cmd.config.name == commandName //||
+        //cmd.config.aliases.includes(commandName)
       );
 
       if (
@@ -223,7 +212,13 @@ module.exports = class BotClient extends Client {
         });
       }
 
-      /*
+      if (command) {
+        message.args = args;
+        command.run(this, message);
+      }
+    });
+
+    /*
       if (
         (command.config.ownerOnly &&
           !message.author.id == "510866456708382730") ||
@@ -241,16 +236,10 @@ module.exports = class BotClient extends Client {
       }
       */
 
-      //let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
-      /*let command = this.normalCommands.find(
+    //let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
+    /*let command = this.normalCommands.find(
         (cmd) => cmd.config.name == commandName
       );
       */
-
-      if (command) {
-        message.args = args;
-        command.run(this, message);
-      }
-    });
   }
 };

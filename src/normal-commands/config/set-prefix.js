@@ -1,12 +1,10 @@
 const GuildConfigSchema = require("../../models/PrefixModel");
 
 module.exports = {
-  async run(client, message) {
+  async run(client, message, args) {
     if (!message.member.permissions.has("ADMINISTRATOR")) return;
 
-    const newPrefix = message.args.join(" ");
-
-    if (!newPrefix) {
+    if (args.length == 0) {
       message.channel.send({
         embeds: [
           client.embeds
@@ -17,6 +15,7 @@ module.exports = {
         ],
       });
     }
+    const newPrefix = args.join(" ");
 
     if (newPrefix.length > 4) {
       message.channel.send({
