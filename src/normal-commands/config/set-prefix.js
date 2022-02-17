@@ -8,7 +8,7 @@ module.exports = {
     expectedArgs: "(new prefix)",
   },
 
-  async run(client, message, args) {
+  async run(client, message) {
     if (!message.member.permissions.has("ADMINISTRATOR")) return;
 
     if (message.args.length == 0) {
@@ -21,6 +21,7 @@ module.exports = {
             ),
         ],
       });
+      return;
     }
     const newPrefix = message.args.join(" ");
 
@@ -37,7 +38,7 @@ module.exports = {
     }
 
     try {
-      await GuildConfigSchema.findOneAndUpdate({}, {}, {});
+      //       await GuildConfigSchema.findOneAndUpdate({}, {}, {});
 
       await GuildConfigSchema.findOneAndUpdate(
         {

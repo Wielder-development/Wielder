@@ -1,5 +1,4 @@
-const GuildConfigSchema = require("../../models/GuildConfigModel");
-
+const GuildConfigSchema = require("../models/GuildConfigModel");
 module.exports = {
   config: {
     name: "shange-global-prefix",
@@ -9,6 +8,7 @@ module.exports = {
   },
 
   async run(client, message, language) {
+
     if (message.args.length == 0) {
       message.channel.send({
         embeds: [
@@ -19,6 +19,7 @@ module.exports = {
             ),
         ],
       });
+      return;
     }
     const newPrefix = message.args.join(" ");
 
@@ -35,26 +36,22 @@ module.exports = {
     }
 
     try {
-      await GuildConfigSchema.findOneAndUpdate({}, {}, {});
-
-      await GuildConfigSchema.findOneAndUpdate(
-        {
-          guildID: message.guild.id,
-        },
-        {
-          prefix: newPrefix,
-        },
-        {
-          upsert: true,
-        }
-      );
+      //       await GuildConfigSchema.findOneAndUpdate({}, {}, {});
+      
+      // await GuildConfigSchema.findOneAndUpdate({},{prefix: newPrefix,},{upsert: true,});
+      let hasDefaultPrefix = await GuildConfigSchema.where({prefix:client.default_prefix});
+      for (guild of hasDefaultPrefix){
+        await GuildConfigSchema.findByIdAndUpdate(hasDefaultPrefix[0]._id,{prefix: newPrefix,},{upsert: true,})
+      }
+      //await defaultPrefix.findOneAndUpdate({},{prefix: newPrefix,},{upsert: true,});
+      client.default_prefix = newPrefix;
 
       message.channel.send({
         embeds: [
           client.embeds
             .success()
             .setDescription(
-              `The prefix was successfully changed to \`${newPrefix}\`!`
+              `The default prefix was successfully changed to \`${newPrefix}\`!`
             ),
         ],
       });

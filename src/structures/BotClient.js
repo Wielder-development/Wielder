@@ -6,7 +6,6 @@ const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Embeds = require("./utilities/embeds");
-const developers = ["510866456708382730", "332115664179298305"]
 const translations = require("../../translations.json")
 
 module.exports = class BotClient extends Client {
@@ -16,7 +15,8 @@ module.exports = class BotClient extends Client {
     this.token = token;
     this.guild_id = dev_guild_id;
     this.client_id = client_id;
-    this.developers = developers;
+    this.developers = ["510866456708382730", "332115664179298305"];
+    this.default_prefix = "+";
 
     this.logger = consola;
 
@@ -27,7 +27,6 @@ module.exports = class BotClient extends Client {
     this.developerCommands = new Collection();
 
     this.textCommands = new Collection();
-
 
     this.embeds = Embeds;
 
@@ -189,7 +188,7 @@ module.exports = class BotClient extends Client {
     this.on("messageCreate", async (message) => {
       const GuildConfigModel = require("../models/GuildConfigModel");
 
-      let prefix = "?";
+      let prefix = this.default_prefix;
       let language = "en";
       let dbConfig = await GuildConfigModel.findOne({ guildID: message.guild.id });
 
@@ -228,7 +227,7 @@ module.exports = class BotClient extends Client {
         (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
       if (command) {
         if (command.config.category != "developers")
-          if (!developers.includes(message.author.id))
+          if (!this.developers.includes(message.author.id))
             return;
         message.args = args;
         command.run(this, message, translations[language]);
