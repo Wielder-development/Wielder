@@ -3,9 +3,8 @@ const { oneLine } = require("common-tags");
 module.exports = {
   config: {
     name: "help",
-    aliases: ["comamnds", "comamndslist"],
+    aliases: ["comamnds", "comamndslist", "cmds", "cmd"],
     description: "showing list of all commands",
-    category: "general",
     expectedArgs: "(command name)",
   },
   async run(client, message, language) {

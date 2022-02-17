@@ -6,8 +6,6 @@ module.exports = {
     name: "ping",
     aliases: [],
     description: "checking the ping",
-    //  ownerOnly: true,
-    category: "general",
     expectedArgs: "none",
   },
   async run(client, message, language) {

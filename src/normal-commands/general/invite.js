@@ -3,7 +3,6 @@ module.exports = {
     name: "invite",
     aliases: ["addbot"],
     description: "sends invite link for bot",
-    category: "general",
     expectedArgs: "None",
   },
   async run(client, message, language) {

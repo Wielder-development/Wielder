@@ -6,6 +6,8 @@ const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Embeds = require("./utilities/embeds");
+const developers = ["510866456708382730", "332115664179298305"]
+
 
 module.exports = class BotClient extends Client {
   constructor(token, dev_guild_id, client_id) {
@@ -14,6 +16,7 @@ module.exports = class BotClient extends Client {
     this.token = token;
     this.guild_id = dev_guild_id;
     this.client_id = client_id;
+    this.developers = developers;
 
     this.logger = consola;
 
@@ -49,7 +52,7 @@ module.exports = class BotClient extends Client {
     /* Event Handler */
 
     const eventFolders = fs.readdirSync(
-      path.resolve(__dirname, "..", "events")
+      path.resolve(__dirname, "..", "events") 
     );
 
     for (const folder of eventFolders) {
@@ -159,10 +162,10 @@ module.exports = class BotClient extends Client {
     }
 
     this.on("messageCreate", async (message) => {
-      const PrefixModel = require("../models/PrefixModel");
+      const GuildConfigModel = require("../models/GuildConfigModel");
 
       let prefix = "?";
-      let dbPrefix = await PrefixModel.findOne({ guildID: message.guild.id });
+      let dbPrefix = await GuildConfigModel.findOne({ guildID: message.guild.id });
       if (dbPrefix) prefix = dbPrefix.prefix;
 
       if (message.mentions.members.size) {
@@ -192,25 +195,9 @@ module.exports = class BotClient extends Client {
       */
 
       let command = this.normalCommands.find(
-        (cmd) => cmd.config.name == commandName //||
-        //cmd.config.aliases.includes(commandName)
-      );
+        (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
 
-      if (
-        command.config.ownerOnly &&
-        message.author.id !== "510866456708382730" &&
-        message.author.id !== "332115664179298305"
-      ) {
-        return message.channel.send({
-          embeds: [
-            this.embeds
-              .error()
-              .setDescription(
-                `You can't run this command, this command can only be used by my developers.`
-              ),
-          ],
-        });
-      }
+      if (command.config.category == "developers") if (!developers.includes(message.author.id)) return;
 
       if (command) {
         message.args = args;

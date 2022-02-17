@@ -8,7 +8,6 @@ module.exports = {
     name: "meme",
     aliases: [],
     description: "sends a random meme from the chosen subreddit",
-    category: "general",
     expectedArgs: "(subreddit name)",
   },
   async run(client, message, language) {
