@@ -24,6 +24,11 @@ module.exports = class BotClient extends Client {
 
     this.normalCommands = new Collection();
 
+    this.developerCommands = new Collection();
+
+    this.textCommands = new Collection();
+
+
     this.embeds = Embeds;
 
     this.db = mongoose;
@@ -157,10 +162,30 @@ module.exports = class BotClient extends Client {
         );
 
         normalCommand.config.category = folder;
+        this.textCommands.set(normalCommand.config.name, normalCommand);
         this.normalCommands.set(normalCommand.config.name, normalCommand);
       }
     }
+// load dev commands
+    const developerCommandsFiles = fs
+        .readdirSync(
+          path.resolve(__dirname, "..", "developer-commands")
+        )
+        .filter((f) => f.endsWith(".js"));
+    for (const file of developerCommandsFiles) {
 
+      const developerCommand = require(`../developer-commands/${file}`);
+      this.logger.log(
+        `Sccessfully loaded normal command ${developerCommand.config.name}`
+      );
+
+      developerCommand.config.category = "developers";
+      this.textCommands.set(developerCommand.config.name, developerCommand);
+      this.developerCommands.set(developerCommand.config.name, developerCommand);
+    }
+
+
+      
     this.on("messageCreate", async (message) => {
       const GuildConfigModel = require("../models/GuildConfigModel");
 
@@ -199,12 +224,12 @@ module.exports = class BotClient extends Client {
       );
       */
 
-      let command = this.normalCommands.find(
+      let command = this.textCommands.find(
         (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
-
-      if (command.config.category == "developers") if (!developers.includes(message.author.id)) return;
-
       if (command) {
+        if (command.config.category != "developers")
+          if (!developers.includes(message.author.id))
+            return;
         message.args = args;
         command.run(this, message, translations[language]);
       }

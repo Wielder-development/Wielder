@@ -9,16 +9,6 @@ module.exports = {
     expectedArgs: "none",
   },
   async run(client, message, language) {
-    /*
-    const pingMsg = await message.reply({
-      embeds: [
-        client.embeds
-          .official(client)
-          .setColor("RED")
-          .setDescription("......."),
-      ],
-    });
-    */
 
     const pingMsg = await message.reply({
       embeds: [
