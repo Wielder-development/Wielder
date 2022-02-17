@@ -1,4 +1,4 @@
-const GuildConfigSchema = require("../models/GuildConfigModel");
+const GuildConfigModel = require("../models/GuildConfigModel");
 module.exports = {
   config: {
     name: "shange-global-prefix",
@@ -36,14 +36,10 @@ module.exports = {
     }
 
     try {
-      //       await GuildConfigSchema.findOneAndUpdate({}, {}, {});
-      
-      // await GuildConfigSchema.findOneAndUpdate({},{prefix: newPrefix,},{upsert: true,});
-      let hasDefaultPrefix = await GuildConfigSchema.where({prefix:client.default_prefix});
+      let hasDefaultPrefix = await GuildConfigModel.where({prefix:client.default_prefix});
       for (guild of hasDefaultPrefix){
-        await GuildConfigSchema.findByIdAndUpdate(hasDefaultPrefix[0]._id,{prefix: newPrefix,},{upsert: true,})
+        await GuildConfigModel.findByIdAndUpdate(hasDefaultPrefix[0]._id,{prefix: newPrefix,},{upsert: true,})
       }
-      //await defaultPrefix.findOneAndUpdate({},{prefix: newPrefix,},{upsert: true,});
       client.default_prefix = newPrefix;
 
       message.channel.send({

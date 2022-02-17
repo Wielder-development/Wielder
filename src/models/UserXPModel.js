@@ -13,4 +13,10 @@ const XPUserSchema = new mongoose.Schema({
     type: mongoose.SchemaTypes.Number,
     required: true,
   },
+  timeoutTimestamp: {
+    type: mongoose.SchemaTypes.Number,
+    required: true,
+  },
 });
+
+module.exports = mongoose.model("userXP", XPUserSchema);

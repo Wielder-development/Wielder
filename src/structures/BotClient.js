@@ -6,6 +6,7 @@ const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Embeds = require("./utilities/embeds");
+const xpSystem = require("./utilities/XPSystem");
 const translations = require("../../translations.json")
 
 module.exports = class BotClient extends Client {
@@ -186,6 +187,9 @@ module.exports = class BotClient extends Client {
 
       
     this.on("messageCreate", async (message) => {
+
+      xpSystem.run(this,message);
+
       const GuildConfigModel = require("../models/GuildConfigModel");
 
       let prefix = this.default_prefix;
@@ -216,46 +220,17 @@ module.exports = class BotClient extends Client {
       if (!message.content.startsWith(prefix)) return;
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();
-
-      /*
-      let command = this.normalCommands.find(
-        (cmd) => cmd.config.name == commandName
-      );
-      */
-
       let command = this.textCommands.find(
         (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
+
       if (command) {
         if (command.config.category != "developers")
           if (!this.developers.includes(message.author.id))
             return;
+        
         message.args = args;
         command.run(this, message, translations[language]);
       }
     });
-
-    /*
-      if (
-        (command.config.ownerOnly &&
-          !message.author.id == "510866456708382730") ||
-        !message.author.id == "332115664179298305"
-      ) {
-        return message.channel.send({
-          embeds: [
-            this.embeds
-              .error()
-              .setDescription(
-                `You can't run this command, this command can only be used by my developers.`
-              ),
-          ],
-        });
-      }
-      */
-
-    //let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
-    /*let command = this.normalCommands.find(
-        (cmd) => cmd.config.name == commandName
-      );
-      */
   }
 };
