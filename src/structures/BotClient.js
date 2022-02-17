@@ -7,7 +7,7 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const Embeds = require("./utilities/embeds");
 const developers = ["510866456708382730", "332115664179298305"]
-
+const translations = require("../../translations.json")
 
 module.exports = class BotClient extends Client {
   constructor(token, dev_guild_id, client_id) {
@@ -165,9 +165,14 @@ module.exports = class BotClient extends Client {
       const GuildConfigModel = require("../models/GuildConfigModel");
 
       let prefix = "?";
-      let dbPrefix = await GuildConfigModel.findOne({ guildID: message.guild.id });
-      if (dbPrefix) prefix = dbPrefix.prefix;
+      let language = "en";
+      let dbConfig = await GuildConfigModel.findOne({ guildID: message.guild.id });
 
+
+      if (dbConfig) {
+        prefix = dbConfig.prefix;
+        language = dbConfig.language;
+      }
       if (message.mentions.members.size) {
         if (message.mentions.has(this.user.id)) {
           const args = message.content.trim().split(/ +/g).slice(1);
@@ -201,7 +206,7 @@ module.exports = class BotClient extends Client {
 
       if (command) {
         message.args = args;
-        command.run(this, message);
+        command.run(this, message, translations[language]);
       }
     });
 
