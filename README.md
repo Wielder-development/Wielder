@@ -9,8 +9,8 @@ The public version will have a premium plan so i can pay for a host.
 2. Open your desired project folder and clone reposototory by typing `git clone https://github.com/barrulik/Wielder.git` into a terminal.
 3. Type `cd Wielder`.
 4. Type `npm install`.
-5. Lastely, to run the program, type `node .`.
-
+5. rename `.env-example` to `.env` and add your token and mongodb uri into there.
+6. Lastely, to run the program, type `node .`.
 ## **Upcoming features:**
 | TODO 	| In Proccess 	| Done
 |:----:	|:------------:	|:----:	
