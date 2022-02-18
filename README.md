@@ -16,10 +16,10 @@ The public version will have a premium plan so i can pay for a host.
 |:----:	|:------------:	|:----:	
 |Add buttons|Moderation|Use mongodb with mongoose client as database
 |Event logger|Welcome bot|Custom prefix
-|Music bot|Multi server support|Get a random meme from r/whatever user wants
-|Spam detection|Translations| XP system
+|Music bot|Translations|Get a random meme from r/whatever user wants
+|Spam detection|| XP system
 |Reddit reminder|              	|Make a development server
 |Custom commands|              	|Reaction roles
-|Twitch reminder|              	|
+|Twitch reminder|              	|Multi server support
 |Youtube reminder|              	|
 |reaction roles interface| |
