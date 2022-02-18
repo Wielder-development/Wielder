@@ -7,14 +7,13 @@ idc for now lol, i have more importent stuff to make
 ## **Upcoming features:**
 | TODO 	| In Proccess 	| Done
 |:----:	|:------------:	|:----:	
-|Welcome bot|Moderation|Use mongodb with mongoose client as database
-|Event logger|XP system|Custom prefix
+|Add buttons|Moderation|Use mongodb with mongoose client as database
+|Event logger|Welcome bot|Custom prefix
 |Reaction roles|Multi server support|Get a random meme from r/whatever user wants
-|Make a development server|Translations|
+|Make a development server|Translations| XP system
 |Music bot|              	|
 |Custom commands|              	|
 |Twitch reminder|              	|
 |Youtube reminder|              	|
 |Reddit reminder|              	|
 |Spam detection|              	|
-|Add buttons|              	|

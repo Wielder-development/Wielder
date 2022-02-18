@@ -3,7 +3,7 @@ const GuildConfigSchema = require("../../models/GuildConfigModel");
 module.exports = {
   config: {
     name: "change-prefix",
-    aliases: ["set-prefix"],
+    aliases: ["set-prefix", "prefix-set"],
     description: "sets prefix",
     expectedArgs: "(new prefix)",
   },

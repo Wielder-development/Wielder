@@ -30,6 +30,7 @@ module.exports = class BotClient extends Client {
     this.textCommands = new Collection();
 
     this.embeds = Embeds;
+    this.xpSystem = xpSystem;
 
     this.db = mongoose;
   }
@@ -187,8 +188,9 @@ module.exports = class BotClient extends Client {
 
       
     this.on("messageCreate", async (message) => {
+      if (!message.guild || message.author.bot) return;
 
-      xpSystem.run(this,message);
+      xpSystem.updateUser(this,message);
 
       const GuildConfigModel = require("../models/GuildConfigModel");
 
