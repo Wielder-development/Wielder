@@ -37,10 +37,11 @@ module.exports = {
 
     try {
       let hasDefaultPrefix = await GuildConfigModel.where({prefix:client.default_prefix});
-      for (guild of hasDefaultPrefix){
-        await GuildConfigModel.findByIdAndUpdate(hasDefaultPrefix[0]._id,{prefix: newPrefix,},{upsert: true,})
+      for (const guild of hasDefaultPrefix){
+        await GuildConfigModel.findByIdAndUpdate(guild._id,{prefix: newPrefix,},{upsert: true,})
       }
       client.default_prefix = newPrefix;
+
 
       message.channel.send({
         embeds: [

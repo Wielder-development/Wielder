@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const Embeds = require("./utilities/embeds");
 const xpSystem = require("./utilities/XPSystem");
 const translations = require("../../translations.json")
+const guildConfigModel = require("../models/GuildConfigModel")
 
 module.exports = class BotClient extends Client {
   constructor(token, dev_guild_id, client_id) {
@@ -17,7 +18,9 @@ module.exports = class BotClient extends Client {
     this.guild_id = dev_guild_id;
     this.client_id = client_id;
     this.developers = ["510866456708382730", "332115664179298305"];
+    //this.default_prefix = "+";
     this.default_prefix = "+";
+
 
     this.logger = consola;
 
@@ -44,8 +47,10 @@ module.exports = class BotClient extends Client {
   async loadDB() {
     this.db
       .connect(process.env.MONGO_URI)
-      .then((val) => {
+      .then(async (val) => {
         this.logger.log(`[DATABASE] Successfully connected to MongoDB!`);
+        this.default_prefix = await guildConfigModel.findOne({guildID: "global" });
+        this.default_prefix = this.default_prefix.prefix;
       })
       .catch((e) =>
         this.logger.error(
