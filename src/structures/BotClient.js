@@ -11,7 +11,7 @@ const translations = require("../../translations.json")
 
 module.exports = class BotClient extends Client {
   constructor(token, dev_guild_id, client_id) {
-    super({ intents: [new Intents(32767)] });
+    super({ intents: [new Intents(32767)], partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
     this.token = token;
     this.guild_id = dev_guild_id;
@@ -69,9 +69,9 @@ module.exports = class BotClient extends Client {
       for (const file of eventFiles) {
         const event = require(`../events/${folder}/${file}`);
         if (event.config.once) {
-          this.once(event.config.name, (...args) => event.run(...args));
+          this.once(event.config.name, async (...args) => event.run(...args));
         } else {
-          this.on(event.config.name, (...args) => event.run(...args));
+          this.on(event.config.name, async (...args) => event.run(...args));
         }
       }
     }

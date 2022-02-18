@@ -8,7 +8,7 @@ module.exports = {
         if (err) return handleError(err)});
     } else {
       if (userXP[0].timeoutTimestamp < new Date().getTime()){
-        let newXP = userXP[0].xp+parseInt(Math.random()*15+10);
+        let newXP = userXP[0].xp+parseInt(Math.random()*10+15);
         await userXPModel.findByIdAndUpdate(userXP[0]._id,{xp:newXP,timeoutTimestamp:(new Date().getTime()+60000),},{upsert: true,})
       }
     }
