@@ -6,7 +6,6 @@ module.exports = {
     expectedArgs: "?(user)",
   },
   async run(client, message, language) {
-    console.log(message)
     let userID = message.author.id;
     let guildID = message.guild.id;
     let targetUser = message.mentions.users.first();
