@@ -144,6 +144,13 @@
   "resolved" "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
   "version" "0.4.0"
 
+"axios@^0.26.0":
+  "integrity" "sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og=="
+  "resolved" "https://registry.npmjs.org/axios/-/axios-0.26.0.tgz"
+  "version" "0.26.0"
+  dependencies:
+    "follow-redirects" "^1.14.8"
+
 "balanced-match@^1.0.0":
   "integrity" "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="
   "resolved" "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
@@ -413,6 +420,11 @@
   "version" "7.0.1"
   dependencies:
     "to-regex-range" "^5.0.1"
+
+"follow-redirects@^1.14.8":
+  "integrity" "sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w=="
+  "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.9.tgz"
+  "version" "1.14.9"
 
 "form-data@^3.0.0":
   "integrity" "sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg=="
@@ -871,14 +883,6 @@
   dependencies:
     "escape-goat" "^2.0.0"
 
-"random-reddit@^2.0.1":
-  "integrity" "sha512-WLRjHAqkp9NjOcseOC1i+ek7+iYLUUo8aYkhMB+8f4liQizLT9S6u3aFcxDfffTCLlGj8LtTo2SrcC0aQmiu/A=="
-  "resolved" "https://registry.npmjs.org/random-reddit/-/random-reddit-2.0.1.tgz"
-  "version" "2.0.1"
-  dependencies:
-    "consola" "^2.15.3"
-    "node-fetch" "^2.6.1"
-
 "rc@^1.2.8":
   "integrity" "sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw=="
   "resolved" "https://registry.npmjs.org/rc/-/rc-1.2.8.tgz"
@@ -895,11 +899,6 @@
   "version" "3.6.0"
   dependencies:
     "picomatch" "^2.2.1"
-
-"reddit-interfaces@^1.0.7":
-  "integrity" "sha512-jdTvcdJWc+DDtogqXkv796Y5oBx9YE4IEU4yRfnipdv3+F+9fsW6VEDJDmpPlTaZ6cZkFvKhdYV9/9ooYquU6A=="
-  "resolved" "https://registry.npmjs.org/reddit-interfaces/-/reddit-interfaces-1.0.7.tgz"
-  "version" "1.0.7"
 
 "regexp-clone@1.0.0":
   "integrity" "sha512-TuAasHQNamyyJ2hb97IuBEif4qBHGjPHBS64sZwytpLEqtBQ1gPJTnOaQ6qmpET16cK14kkjbazl6+p0RRv0yw=="
@@ -977,11 +976,6 @@
   "integrity" "sha512-sDl4qMFpijcGw22U5w63KmD3cZJfBuFlVNbVMKje2keoKML7X2UzWbc4XrmEbDwg0NXJc3yv4/ox7b+JWb57kQ=="
   "resolved" "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.6.tgz"
   "version" "3.0.6"
-
-"snekfetch@^4.0.4":
-  "integrity" "sha512-dyycG9fvwtSJqKPfMVOpXt+60qvMGe7vWLwOJDiSJaiAx+hs2EnFChG2bXCWn7ulz+zGzrHdN9/yeEb0YqEPww=="
-  "resolved" "https://registry.npmjs.org/snekfetch/-/snekfetch-4.0.4.tgz"
-  "version" "4.0.4"
 
 "sparse-bitfield@^3.0.3":
   "integrity" "sha1-/0rm5oZWBWuks+eSqzM004JzyhE="
