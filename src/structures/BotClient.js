@@ -188,7 +188,7 @@ module.exports = class BotClient extends Client {
 
       
     this.on("messageCreate", async (message) => {
-      if (!message.guildId || message.author.bot) return;
+      if (message.author.bot) return;
 
       xpSystem.updateUser(this,message);
 
@@ -204,17 +204,18 @@ module.exports = class BotClient extends Client {
         language = dbConfig.language;
       }
       if (message.mentions.members.size) {
-        if (message.mentions.has(this.user.id)) {
-          const args = message.content.trim().split(/ +/g).slice(1);
+        let args = message.content.trim().split(/ +/g);
+        if (args[0].substring(3,args[0].length-1) == this.user.id){
+          args = args.slice(1);
           if (args.length == 0) return;
           const commandName = args.shift().toLowerCase();
 
-          /*
+          let command = this.textCommands.find(
+            (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
           if (command) {
             message.args = args;
             command.run(this, message);
           }
-          */
           return;
         }
       }
@@ -226,7 +227,7 @@ module.exports = class BotClient extends Client {
         (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
 
       if (command) {
-        if (command.config.category != "developers")
+        if (command.config.category == "developers")
           if (!this.developers.includes(message.author.id))
             return;
         
