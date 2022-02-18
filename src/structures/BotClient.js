@@ -69,9 +69,9 @@ module.exports = class BotClient extends Client {
       for (const file of eventFiles) {
         const event = require(`../events/${folder}/${file}`);
         if (event.config.once) {
-          this.once(event.config.name, async (...args) => event.run(...args));
+          this.once(event.config.name, async (...args) => event.run(this,...args));
         } else {
-          this.on(event.config.name, async (...args) => event.run(...args));
+          this.on(event.config.name, async (...args) => event.run(this,...args));
         }
       }
     }

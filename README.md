@@ -14,12 +14,12 @@ The public version will have a premium plan so i can pay for a host.
 ## **Upcoming features:**
 | TODO 	| In Proccess 	| Done
 |:----:	|:------------:	|:----:	
-|Add buttons|Moderation|Use mongodb with mongoose client as database
-|Event logger|Welcome bot|Custom prefix
-|Music bot|Translations|Get a random meme from r/whatever user wants
-|Spam detection|| XP system
-|Reddit reminder|              	|Make a development server
-|Custom commands|              	|Reaction roles
-|Twitch reminder|              	|Multi server support
-|Youtube reminder|              	|
-|reaction roles interface| |
+|Add buttons     |Moderation  |Use mongodb with mongoose client as database
+|Event logger    |Translations|Custom prefix
+|Music bot       |beautifying |Get a random meme from r/whatever user wants
+|Spam detection  |            |XP system
+|Reddit reminder |            |Make a development server
+|Custom commands |            |Reaction roles
+|Twitch reminder |            |Multi server support
+|Youtube reminder|            |Welcome bot
+|reaction roles interface|    |

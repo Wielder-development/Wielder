@@ -5,7 +5,7 @@ module.exports = {
     once: false,
   },
 
-  async run(reaction, user) {
+  async run(client, reaction, user) {
     if (reaction.partial) {
       // If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
       try {

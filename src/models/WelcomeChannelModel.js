@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
-const ReactionRolesSchema = new mongoose.Schema({
-  messageID: {
+const welcomeChannelSchema = new mongoose.Schema({
+  guildID: {
     type: mongoose.SchemaTypes.String,
     required: true,
   },
-  roleID: {
+  welcomeChannelID: {
     type: mongoose.SchemaTypes.String,
     required: true,
   },
-  emojiID: {
+  leaveChannelID: {
     type: mongoose.SchemaTypes.String,
     required: true,
   },
 });
 
-module.exports = mongoose.model("reactionRoles", ReactionRolesSchema);
+module.exports = mongoose.model("welcomeChannel", welcomeChannelSchema);
