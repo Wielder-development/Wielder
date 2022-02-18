@@ -188,7 +188,7 @@ module.exports = class BotClient extends Client {
 
       
     this.on("messageCreate", async (message) => {
-      if (!message.guild || message.author.bot) return;
+      if (!message.guildId || message.author.bot) return;
 
       xpSystem.updateUser(this,message);
 
