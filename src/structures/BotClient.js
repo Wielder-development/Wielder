@@ -222,9 +222,9 @@ module.exports = class BotClient extends Client {
             try {
             command.run(this, message);
             } catch (err) {
-              let time = new Date().getTime();
+              let timestamp = new Date().getTime();
               console.error(`time: ${time}, ${err}`);
-              message.reply(`there was an error, time: \`${time}\``)
+              message.reply(`there was an error, current timestamp: \`${time}\``)
             }
           }
           return;
