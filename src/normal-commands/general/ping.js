@@ -1,4 +1,3 @@
-const { oneLine } = require("common-tags");
 const Embeds = require("../../structures/utilities/embeds");
 
 module.exports = {

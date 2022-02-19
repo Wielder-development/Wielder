@@ -5,12 +5,12 @@ module.exports = {
     description: "eval command",
     expectedArgs: "(evaled content)",
   },
-  run(client, message, language) {
+  async run(client, message, language) {
     try {
-      eval(message.args.join(" ").trim());
+      await eval(message.args.join(" ").trim());
       message.channel.send("evaled seccessfully");
     } catch (err){
-      message.channel.send(`there was an error\n${err}`);
+      message.channel.send(`there was an error\n\`${err}\``);
     }
   },
 };

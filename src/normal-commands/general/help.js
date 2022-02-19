@@ -1,5 +1,3 @@
-const { oneLine } = require("common-tags");
-
 module.exports = {
   config: {
     name: "help",
