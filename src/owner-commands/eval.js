@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     name: "eval",
-    aliases: [],
+    aliases: ["run"],
     description: "eval command",
     expectedArgs: "(evaled content)",
   },
