@@ -17,7 +17,7 @@ module.exports = class BotClient extends Client {
     this.token = token;
     this.guild_id = dev_guild_id;
     this.client_id = client_id;
-    this.developers = ["510866456708382730", "332115664179298305"];
+    this.owners = ["510866456708382730", "332115664179298305"];
     //this.default_prefix = "+";
     this.default_prefix = "+";
 
@@ -175,12 +175,12 @@ module.exports = class BotClient extends Client {
 // load dev commands
     const developerCommandsFiles = fs
         .readdirSync(
-          path.resolve(__dirname, "..", "developer-commands")
+          path.resolve(__dirname, "..", "owner-commands")
         )
         .filter((f) => f.endsWith(".js"));
     for (const file of developerCommandsFiles) {
 
-      const developerCommand = require(`../developer-commands/${file}`);
+      const developerCommand = require(`../owner-commands/${file}`);
       this.logger.log(
         `Sccessfully loaded normal command ${developerCommand.config.name}`
       );
@@ -233,7 +233,7 @@ module.exports = class BotClient extends Client {
 
       if (command) {
         if (command.config.category == "developers")
-          if (!this.developers.includes(message.author.id))
+          if (!this.owners.includes(message.author.id))
             return;
         
         message.args = args;
