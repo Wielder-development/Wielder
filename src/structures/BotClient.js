@@ -219,7 +219,13 @@ module.exports = class BotClient extends Client {
             (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
           if (command) {
             message.args = args;
+            try {
             command.run(this, message);
+            } catch (err) {
+              let time = new Date().getTime();
+              console.error(`time: ${time}, ${err}`);
+              message.reply(`there was an error, time: \`${time}\``)
+            }
           }
           return;
         }
