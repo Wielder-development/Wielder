@@ -17,7 +17,7 @@
     "dotenv": "^14.3.2",
     "glob": "^7.2.0",
     "moment": "^2.29.1",
-    "mongoose": "^6.1.8"
+    "mongoose": "^6.2.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

@@ -21,7 +21,6 @@ module.exports = class BotClient extends Client {
     //this.default_prefix = "+";
     this.default_prefix = "+";
 
-
     this.logger = consola;
 
     this.slashCommands = new Collection();
@@ -246,5 +245,6 @@ module.exports = class BotClient extends Client {
         command.run(this, message, translations[language]);
       }
     });
+    this.commandsArray = [...Array.from(this.normalCommands.values())];
   }
 };
