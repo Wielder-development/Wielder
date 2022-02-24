@@ -11,7 +11,7 @@ module.exports = {
   async run(client, message, language) {
     
     
-    if (!message.member.permissions.has('MANAGE_MESSAGES') return;
+    if (!message.member.permissions.has('MANAGE_MESSAGES')) return;
     
     let amount = message.args[0];
     if (isNaN(amount)) return message.channel.send("Invalid message number");
