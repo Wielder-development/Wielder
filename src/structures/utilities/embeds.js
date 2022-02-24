@@ -14,46 +14,46 @@ module.exports = class Embeds {
         iconURL: client.user.displayAvatarURL(),
       },
       footer: {
-        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Wielder  || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
     });
   };
 
-  static error = () => {
+  static error = (client) => {
     return new MessageEmbed({
       author: {
         name: "❌ Error",
       },
       title: "Error!",
       footer: {
-        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Wielder  || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
     });
   };
 
-  static success = () => {
+  static success = (client) => {
     return new MessageEmbed({
       title: "Success",
       footer: {
-        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Wielder || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
       color: "#01FF00",
       timestamp: new Date(),
     });
   };
 
-  static empty = () => {
+  static empty = (client) => {
     return new MessageEmbed({
       footer: {
-        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Wielder || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
     });
   };
 
-  static randomColor = () => {
+  static randomColor = (client) => {
     return new MessageEmbed({
       footer: {
-        text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        text: "Wielder  || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
       color: "RANDOM",
       timestamp: new Date(),
