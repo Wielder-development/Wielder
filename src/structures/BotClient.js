@@ -6,16 +6,25 @@ const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Embeds = require("./utilities/embeds");
+<<<<<<< HEAD
 const { Memer } = require("memer-api");
 const { DiscordTogether } = require("discord-together");
+=======
+const xpSystem = require("./utilities/XPSystem");
+const translations = require("../../translations.json")
+const guildConfigModel = require("../models/GuildConfigModel")
+>>>>>>> 3214492a6ff17cfe62c79b4c2507bf01494773b3
 
 module.exports = class BotClient extends Client {
   constructor(token, dev_guild_id, client_id) {
-    super({ intents: [new Intents(32767)] });
+    super({ intents: [new Intents(32767)], partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 
     this.token = token;
     this.guild_id = dev_guild_id;
     this.client_id = client_id;
+    this.owners = ["510866456708382730", "332115664179298305"];
+    //this.default_prefix = "+";
+    this.default_prefix = "+";
 
     this.logger = consola;
 
@@ -23,7 +32,12 @@ module.exports = class BotClient extends Client {
 
     this.normalCommands = new Collection();
 
+    this.developerCommands = new Collection();
+
+    this.textCommands = new Collection();
+
     this.embeds = Embeds;
+    this.xpSystem = xpSystem;
 
     this.db = mongoose;
 
@@ -48,8 +62,10 @@ module.exports = class BotClient extends Client {
   async loadDB() {
     this.db
       .connect(process.env.MONGO_URI)
-      .then((val) => {
+      .then(async (val) => {
         this.logger.log(`[DATABASE] Successfully connected to MongoDB!`);
+        this.default_prefix = await guildConfigModel.findOne({guildID: "global" });
+        this.default_prefix = this.default_prefix.prefix;
       })
       .catch((e) =>
         this.logger.error(
@@ -62,7 +78,7 @@ module.exports = class BotClient extends Client {
     /* Event Handler */
 
     const eventFolders = fs.readdirSync(
-      path.resolve(__dirname, "..", "events")
+      path.resolve(__dirname, "..", "events") 
     );
 
     for (const folder of eventFolders) {
@@ -73,9 +89,9 @@ module.exports = class BotClient extends Client {
       for (const file of eventFiles) {
         const event = require(`../events/${folder}/${file}`);
         if (event.config.once) {
-          this.once(event.config.name, (...args) => event.run(...args));
+          this.once(event.config.name, async (...args) => event.run(this,...args));
         } else {
-          this.on(event.config.name, (...args) => event.run(...args));
+          this.on(event.config.name, async (...args) => event.run(this,...args));
         }
       }
     }
@@ -167,29 +183,71 @@ module.exports = class BotClient extends Client {
         );
 
         normalCommand.config.category = folder;
+        this.textCommands.set(normalCommand.config.name, normalCommand);
         this.normalCommands.set(normalCommand.config.name, normalCommand);
       }
     }
+// load dev commands
+    const developerCommandsFiles = fs
+        .readdirSync(
+          path.resolve(__dirname, "..", "owner-commands")
+        )
+        .filter((f) => f.endsWith(".js"));
+    for (const file of developerCommandsFiles) {
 
+      const developerCommand = require(`../owner-commands/${file}`);
+      this.logger.log(
+        `Sccessfully loaded normal command ${developerCommand.config.name}`
+      );
+
+      developerCommand.config.category = "developers";
+      this.textCommands.set(developerCommand.config.name, developerCommand);
+      this.developerCommands.set(developerCommand.config.name, developerCommand);
+    }
+
+
+      
     this.on("messageCreate", async (message) => {
-      const PrefixModel = require("../models/PrefixModel");
+      if (message.author.bot) return;
 
+      xpSystem.updateUser(this,message);
+
+<<<<<<< HEAD
       let prefix = "?!";
       let dbPrefix = await PrefixModel.findOne({ guildID: message.guild.id });
       if (dbPrefix) prefix = dbPrefix.prefix;
+=======
+      const GuildConfigModel = require("../models/GuildConfigModel");
+>>>>>>> 3214492a6ff17cfe62c79b4c2507bf01494773b3
 
+      let prefix = this.default_prefix;
+      let language = "en";
+      let dbConfig = await GuildConfigModel.findOne({ guildID: message.guild.id });
+
+
+      if (dbConfig) {
+        prefix = dbConfig.prefix;
+        language = dbConfig.language;
+      }
       if (message.mentions.members.size) {
-        if (message.mentions.has(this.user.id)) {
-          const args = message.content.trim().split(/ +/g).slice(1);
+        let args = message.content.trim().split(/ +/g);
+        if (args[0].substring(3,args[0].length-1) == this.user.id){
+          args = args.slice(1);
           if (args.length == 0) return;
           const commandName = args.shift().toLowerCase();
 
-          /*
+          let command = this.textCommands.find(
+            (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
           if (command) {
             message.args = args;
+            try {
             command.run(this, message);
+            } catch (err) {
+              let timestamp = new Date().getTime();
+              console.error(`time: ${time}, ${err}`);
+              message.reply(`there was an error, current timestamp: \`${time}\``)
+            }
           }
-          */
           return;
         }
       }
@@ -197,16 +255,29 @@ module.exports = class BotClient extends Client {
       if (!message.content.startsWith(prefix)) return;
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();
+<<<<<<< HEAD
 
       let command = this.normalCommands.find(
         (cmd) => cmd.config.name == commandName //||
         //cmd.config.aliases.includes(commandName)
       );
+=======
+      let command = this.textCommands.find(
+        (cmd) => cmd.config.name == commandName ||cmd.config.aliases.includes(commandName));
+>>>>>>> 3214492a6ff17cfe62c79b4c2507bf01494773b3
 
       if (command) {
+        if (command.config.category == "developers")
+          if (!this.owners.includes(message.author.id))
+            return;
+        
         message.args = args;
-        command.run(this, message);
+        command.run(this, message, translations[language]);
       }
     });
+<<<<<<< HEAD
+=======
+    this.commandsArray = [...Array.from(this.normalCommands.values())];
+>>>>>>> 3214492a6ff17cfe62c79b4c2507bf01494773b3
   }
 };

@@ -1,16 +1,18 @@
 const mongoose = require("mongoose");
 
-const XPUserSchema = new mongoose.Schema({
+const welcomeChannelSchema = new mongoose.Schema({
   guildID: {
     type: mongoose.SchemaTypes.String,
     required: true,
   },
-  userID: {
+  welcomeChannelID: {
     type: mongoose.SchemaTypes.String,
     required: true,
   },
-  xp: {
-    type: mongoose.SchemaTypes.Number,
+  leaveChannelID: {
+    type: mongoose.SchemaTypes.String,
     required: true,
   },
 });
+
+module.exports = mongoose.model("welcomeChannel", welcomeChannelSchema);

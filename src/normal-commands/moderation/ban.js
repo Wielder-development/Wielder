@@ -3,7 +3,6 @@ module.exports = {
     name: "ban",
     aliases: [],
     description: "Bans idiots",
-    category: "general",
     expectedArgs: "<member to ban>",
   },
   async run(client, message, language) {

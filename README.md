@@ -1,20 +1,25 @@
-# Discord-bot
-A fully free open source discord bot.
+# Wielder
+A semi free open source discord bot.
 
-We are making it because we want compete with all the bots that has premium plans just so you dont have to pay.
+## **Plans**
+The bot is gonna be fully open source and free for self hosting (premium included).
+The public version will have a premium plan so i can pay for a host.
 ## **Installation**
-idc for now lol, i have more importent stuff to make
+1. Download <a href="https://nodejs.org/en/download/" target="_blank">Node.js</a>, any version equal or higher then 16.
+2. Open your desired project folder and clone reposototory by typing `git clone https://github.com/barrulik/Wielder.git` into a terminal.
+3. Type `cd Wielder`.
+4. Type `npm install`.
+5. rename `.env-example` to `.env` and add your token and mongodb uri into there.
+6. Lastely, to run the program, type `node .`.
 ## **Upcoming features:**
 | TODO 	| In Proccess 	| Done
 |:----:	|:------------:	|:----:	
-|Welcome bot|Moderation|Use mongodb with mongoose client as database
-|Event logger|XP system|Custom prefix
-|Reaction roles|Multi server support|Get a random meme from r/whatever user wants
-|Make a development server|Translations|
-|Music bot|              	|
-|Custom commands|              	|
-|Twitch reminder|              	|
-|Youtube reminder|              	|
-|Reddit reminder|              	|
-|Spam detection|              	|
-|Add buttons|              	|
+|Add buttons     |Moderation  |Use mongodb with mongoose client as database
+|Event logger    |Translations|Custom prefix
+|Music bot       |beautifying |Get a random meme from r/whatever user wants
+|Spam detection  |            |XP system
+|Reddit reminder |            |Make a development server
+|Custom commands |            |Reaction roles
+|Twitch reminder |            |Multi server support
+|Youtube reminder|            |Welcome bot
+|reaction roles interface|    |

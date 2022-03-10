@@ -7,7 +7,10 @@ module.exports = {
     name: "user-info",
     aliases: ["userinfo", " ui", "user"],
     description: "Display some information about a user.",
+<<<<<<< HEAD
     category: "Info",
+=======
+>>>>>>> 3214492a6ff17cfe62c79b4c2507bf01494773b3
     expectedArgs: "(user)",
   },
 
@@ -123,4 +126,8 @@ module.exports = {
 
     message.channel.send({ embeds: [embed] });
   },
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 3214492a6ff17cfe62c79b4c2507bf01494773b3

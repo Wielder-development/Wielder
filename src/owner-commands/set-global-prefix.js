@@ -1,15 +1,13 @@
-const GuildConfigSchema = require("../../models/GuildConfigModel");
-
+const GuildConfigModel = require("../models/GuildConfigModel");
 module.exports = {
   config: {
-    name: "change-prefix",
-    aliases: ["set-prefix", "prefix-set"],
-    description: "sets prefix",
+    name: "shange-global-prefix",
+    aliases: ["set-global-prefix", "change-default-prefix", "set-default-prefix"],
+    description: "sets global prefix",
     expectedArgs: "(new prefix)",
   },
 
-  async run(client, message) {
-    if (!message.member.permissions.has("ADMINISTRATOR")) return;
+  async run(client, message, language) {
 
     if (message.args.length == 0) {
       message.channel.send({
@@ -38,26 +36,19 @@ module.exports = {
     }
 
     try {
-      //       await GuildConfigSchema.findOneAndUpdate({}, {}, {});
+      let hasDefaultPrefix = await GuildConfigModel.where({prefix:client.default_prefix});
+      for (const guild of hasDefaultPrefix){
+        await GuildConfigModel.findByIdAndUpdate(guild._id,{prefix: newPrefix,},{upsert: true,})
+      }
+      client.default_prefix = newPrefix;
 
-      await GuildConfigSchema.findOneAndUpdate(
-        {
-          guildID: message.guild.id,
-        },
-        {
-          prefix: newPrefix,
-        },
-        {
-          upsert: true,
-        }
-      );
 
       message.channel.send({
         embeds: [
           client.embeds
             .success()
             .setDescription(
-              `The prefix was successfully changed to \`${newPrefix}\`!`
+              `The default prefix was successfully changed to \`${newPrefix}\`!`
             ),
         ],
       });

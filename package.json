@@ -10,19 +10,24 @@
   "dependencies": {
     "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.3.0",
-    "common-tags": "^1.8.2",
+    "axios": "^0.26.0",
     "consola": "^2.15.3",
     "discord-api-types": "^0.26.1",
     "discord-together": "^1.3.3",
     "discord.js": "^13.6.0",
     "dotenv": "^14.3.2",
     "glob": "^7.2.0",
+<<<<<<< HEAD
     "memer-api": "^4.0.1",
     "moment": "^2.29.1",
     "mongoose": "^6.1.8",
     "random-reddit": "^2.0.1",
     "request": "^2.88.2",
     "snekfetch": "^4.0.4"
+=======
+    "moment": "^2.29.1",
+    "mongoose": "^6.2.3"
+>>>>>>> 3214492a6ff17cfe62c79b4c2507bf01494773b3
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
