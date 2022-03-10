@@ -30,7 +30,8 @@ module.exports = {
 
     return pingMsg.edit({
       embeds: [
-        Embeds.offical(client).setTitle("Pong!").setDescription(`
+        Embeds.offical(client).setColor("RED").setTitle("Pong!")
+          .setDescription(`
         ⏰ message round-trip took **${
           (pingMsg.editedTimestamp || pingMsg.createdTimestamp) -
           (message.editedTimestamp || message.createdTimestamp)

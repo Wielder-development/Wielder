@@ -6,6 +6,8 @@ const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const Embeds = require("./utilities/embeds");
+const { Memer } = require("memer-api");
+const { DiscordTogether } = require("discord-together");
 
 module.exports = class BotClient extends Client {
   constructor(token, dev_guild_id, client_id) {
@@ -24,6 +26,17 @@ module.exports = class BotClient extends Client {
     this.embeds = Embeds;
 
     this.db = mongoose;
+
+    this.memer = new Memer(process.env.MEMER_API);
+
+    this.ytTogether = new DiscordTogether(this);
+
+    /*
+    let timestampStart = new Date();
+    let timestampEnd;
+    proccess().then(()=>timestampEnd = new Date())
+    let time = timestampEnd-timestampStart;
+*/
   }
 
   async loadBot() {
@@ -161,7 +174,7 @@ module.exports = class BotClient extends Client {
     this.on("messageCreate", async (message) => {
       const PrefixModel = require("../models/PrefixModel");
 
-      let prefix = "?";
+      let prefix = "?!";
       let dbPrefix = await PrefixModel.findOne({ guildID: message.guild.id });
       if (dbPrefix) prefix = dbPrefix.prefix;
 
@@ -185,61 +198,15 @@ module.exports = class BotClient extends Client {
       const args = message.content.slice(prefix.length).trim().split(/ +/g);
       const commandName = args.shift().toLowerCase();
 
-      /*
-      let command = this.normalCommands.find(
-        (cmd) => cmd.config.name == commandName
-      );
-      */
-
       let command = this.normalCommands.find(
         (cmd) => cmd.config.name == commandName //||
         //cmd.config.aliases.includes(commandName)
       );
-
-      if (
-        command.config.ownerOnly &&
-        message.author.id !== "510866456708382730" &&
-        message.author.id !== "332115664179298305"
-      ) {
-        return message.channel.send({
-          embeds: [
-            this.embeds
-              .error()
-              .setDescription(
-                `You can't run this command, this command can only be used by my developers.`
-              ),
-          ],
-        });
-      }
 
       if (command) {
         message.args = args;
         command.run(this, message);
       }
     });
-
-    /*
-      if (
-        (command.config.ownerOnly &&
-          !message.author.id == "510866456708382730") ||
-        !message.author.id == "332115664179298305"
-      ) {
-        return message.channel.send({
-          embeds: [
-            this.embeds
-              .error()
-              .setDescription(
-                `You can't run this command, this command can only be used by my developers.`
-              ),
-          ],
-        });
-      }
-      */
-
-    //let command = this.normalCommands.find(cmd=> cmd.config.name == commandName || cmd.config.aliases.includes(commandName))
-    /*let command = this.normalCommands.find(
-        (cmd) => cmd.config.name == commandName
-      );
-      */
   }
 };

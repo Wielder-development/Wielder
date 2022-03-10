@@ -15,7 +15,10 @@ module.exports = class Embeds {
       },
       footer: {
         text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
+        iconURL: client.user.displayAvatarURL(),
       },
+      timestamp: new Date(),
+      color: "GOLD",
     });
   };
 
@@ -33,7 +36,7 @@ module.exports = class Embeds {
 
   static success = () => {
     return new MessageEmbed({
-      title: "Success",
+      //  title: "Success",
       footer: {
         text: "Bot || Developed by Psyonix_#9705 and BarrulikDev#0925",
       },
